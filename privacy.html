@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Franco</title>
+<meta name="description" content="Franco's privacy policy. All financial data stays on your device. No tracking, no analytics, no third-party sharing.">
+<style>
+  :root {
+    --bg: #0D1017;
+    --surface: #161C26;
+    --border: #1F2A3A;
+    --text: #E8EAE6;
+    --text-dim: #7A8190;
+    --text-faint: #4A515F;
+    --accent: #F0A500;
+    --positive: #3DD68C;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+  header { margin-bottom: 48px; }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #1A1208;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .brand-mark::before {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #E09800;
+  }
+  .brand-mark span {
+    position: relative;
+    z-index: 1;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: bold;
+    color: #100A03;
+    font-size: 18px;
+    line-height: 1;
+  }
+  .brand-name {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+  }
+  .last-updated {
+    color: var(--text-dim);
+    font-size: 14px;
+    margin: 0;
+  }
+  .callout {
+    background: rgba(61, 214, 140, 0.08);
+    border-left: 3px solid var(--positive);
+    padding: 16px 20px;
+    margin: 32px 0 40px;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout p {
+    margin: 0;
+    color: var(--text);
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 36px 0 12px;
+    letter-spacing: 0.3px;
+  }
+  h2:first-of-type { margin-top: 0; }
+  p {
+    margin: 0 0 16px 0;
+    color: var(--text);
+  }
+  p.dim { color: var(--text-dim); }
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-faint);
+    font-size: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+  }
+  footer a {
+    color: var(--text-dim);
+    text-decoration: none;
+  }
+  footer a:hover { color: var(--text); }
+  @media (max-width: 600px) {
+    .container { padding: 32px 20px 64px; }
+    h1 { font-size: 26px; }
+    h2 { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <a href="/" class="brand">
+      <div class="brand-mark" style="position: relative;">
+        <span>F</span>
+      </div>
+      <span class="brand-name">Franco</span>
+    </a>
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last updated 6 May 2026</p>
+  </header>
+
+  <div class="callout">
+    <p>Franco stores all your financial data locally on your device. We do not collect, transmit, or share your personal or financial information with any third parties, except for the limited external requests described below.</p>
+  </div>
+
+  <h2>Data stored on your device</h2>
+  <p>All data you enter into Franco — including share trades, dividends, property details, mortgage balances, rental income, property expenses, superannuation balances, crypto transactions, and your FIRE goal — is stored locally on your device using on-device storage. This data is never transmitted to our servers.</p>
+
+  <h2>Share and crypto price data</h2>
+  <p>To display live prices, Franco makes outbound requests to Yahoo Finance (ASX and international share prices) and CoinGecko (cryptocurrency prices). These requests contain only ticker symbols or coin identifiers — no personal data, account details, or portfolio information is included. Franco has no control over the privacy practices of these third-party providers.</p>
+
+  <h2>Address autocomplete</h2>
+  <p>When adding a property, Franco may query an address search service to suggest property addresses as you type. Only the partial address text you have typed is sent in these requests — no other personal or financial data is transmitted. If you prefer not to use autocomplete, you can type your address directly without selecting a suggestion.</p>
+
+  <h2>Backup files</h2>
+  <p>Franco can export a backup file containing all your portfolio data in JSON format. This file is saved to your device and shared only through the iOS share sheet at your explicit direction — for example, to save to Files, email to yourself, or store in iCloud Drive. Franco does not automatically upload backup files anywhere. You are responsible for the security of any backup files you create and share.</p>
+
+  <h2>CSV imports</h2>
+  <p>When you import a broker or exchange CSV file, that file is read locally on your device and is not transmitted to any server. Imported transaction data is stored alongside your other data on-device.</p>
+
+  <h2>Analytics and crash reporting</h2>
+  <p>Franco does not use any analytics services, crash reporting tools, or behavioural tracking. We have no visibility into how you use the app, what data you enter, or what features you access.</p>
+
+  <h2>Data deletion</h2>
+  <p>You can delete all Franco data at any time using the Wipe All Data option in Settings, or by uninstalling the app. All locally stored data will be permanently removed. Backup files you have saved outside the app (for example in Files or iCloud Drive) are not affected and must be deleted manually.</p>
+
+  <h2>Contact</h2>
+  <p>If you have questions about this privacy policy, please contact us at <a href="mailto:admin@francoapp.com.au" style="color: var(--accent); text-decoration: none;">admin@francoapp.com.au</a>.</p>
+
+  <footer>
+    <span>© 2026 Franco</span>
+    <span>
+      <a href="/">Home</a> ·
+      <a href="/terms">Terms</a> ·
+      <a href="/support">Support</a>
+    </span>
+  </footer>
+</div>
+</body>
+</html>

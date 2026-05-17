@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Franco</title>
+<meta name="description" content="Get help with Franco — FAQ and contact details.">
+<style>
+  :root {
+    --bg: #0D1017;
+    --surface: #161C26;
+    --border: #1F2A3A;
+    --text: #E8EAE6;
+    --text-dim: #7A8190;
+    --text-faint: #4A515F;
+    --accent: #F0A500;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
+  header { margin-bottom: 48px; }
+  .brand {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 32px;
+    text-decoration: none; color: var(--text);
+  }
+  .brand-mark {
+    width: 36px; height: 36px; border-radius: 8px; background: #1A1208;
+    display: grid; place-items: center; flex-shrink: 0; position: relative;
+  }
+  .brand-mark::before {
+    content: ''; position: absolute;
+    width: 26px; height: 26px; border-radius: 50%; background: #E09800;
+  }
+  .brand-mark span {
+    position: relative; z-index: 1;
+    font-family: Georgia, 'Times New Roman', serif; font-weight: bold;
+    color: #100A03; font-size: 18px; line-height: 1;
+  }
+  .brand-name {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 24px; font-weight: bold; letter-spacing: 0.5px;
+  }
+  h1 { font-size: 32px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px; }
+  .lede { color: var(--text-dim); font-size: 17px; margin: 0 0 32px; }
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 0 0 48px;
+  }
+  .contact-card h2 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: var(--accent);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .contact-card p { margin: 0 0 12px; }
+  .contact-card p:last-child { margin: 0; }
+  .contact-card a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .contact-card a:hover { text-decoration: underline; }
+  h2.section {
+    font-size: 18px; font-weight: 600; color: var(--accent);
+    margin: 36px 0 12px; letter-spacing: 0.3px;
+  }
+  h2.section:first-of-type { margin-top: 0; }
+  .qa { margin: 0 0 24px; }
+  .qa .q {
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 6px;
+  }
+  .qa .a {
+    color: var(--text-dim);
+    margin: 0;
+  }
+  footer {
+    margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
+    color: var(--text-faint); font-size: 13px;
+    display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;
+  }
+  footer a { color: var(--text-dim); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+  @media (max-width: 600px) {
+    .container { padding: 32px 20px 64px; }
+    h1 { font-size: 26px; }
+    h2.section { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <a href="/" class="brand">
+      <div class="brand-mark"><span>F</span></div>
+      <span class="brand-name">Franco</span>
+    </a>
+    <h1>Support</h1>
+    <p class="lede">Get help with Franco. Send an email or check the answers below first.</p>
+  </header>
+
+  <div class="contact-card">
+    <h2>Get in touch</h2>
+    <p>Have a question, found a bug, or want to suggest a feature?</p>
+    <p>Email <a href="mailto:admin@francoapp.com.au">admin@francoapp.com.au</a></p>
+  </div>
+
+  <h2 class="section">Frequently asked questions</h2>
+
+  <div class="qa">
+    <p class="q">Where is my data stored?</p>
+    <p class="a">All your financial data lives on your device. Franco doesn't have servers, doesn't have user accounts, and doesn't transmit your portfolio anywhere. The only outbound requests are for live share prices, crypto prices, and address autocomplete — and those send only ticker symbols or partial address text, never your data.</p>
+  </div>
+
+  <div class="qa">
+    <p class="q">Can I sync data between my iPhone and iPad?</p>
+    <p class="a">Not currently. Franco uses on-device storage with no cloud sync. To move data between devices, use the Backup &amp; Restore feature in Settings — export a backup file on one device and import it on the other.</p>
+  </div>
+
+  <div class="qa">
+    <p class="q">How do I import my existing share trades?</p>
+    <p class="a">Franco supports CSV imports from major Australian brokers. In the Shares tab, tap the menu and select Import. Choose your CSV file from the file picker and Franco will parse it.</p>
+  </div>
+
+  <div class="qa">
+    <p class="q">Why does the app need photo library access?</p>
+    <p class="a">It doesn't — Franco never opens your photos. The permission entry exists because a third-party library bundled with the app references the photo library API. Apple requires the entry to be present even when the app doesn't actually use it.</p>
+  </div>
+
+  <div class="qa">
+    <p class="q">Is the tax summary suitable for lodging with the ATO?</p>
+    <p class="a">The tax summary maps your data to ATO myTax labels and applies Australian rules including the 50% CGT discount, FIFO cost-base accounting, and franking credit gross-up. It's intended as a complete information pack for you and your accountant. Franco is not a registered tax agent and the summary does not constitute tax advice — please review carefully before lodging.</p>
+  </div>
+
+  <div class="qa">
+    <p class="q">How do I delete all my data?</p>
+    <p class="a">Open Settings within the app and tap Wipe All Data. This permanently removes all locally stored data. Alternatively, deleting the app from your home screen also removes all data — but Franco can't delete backup files you've saved elsewhere (in Files, iCloud Drive, etc.), so manage those separately.</p>
+  </div>
+
+  <div class="qa">
+    <p class="q">Does Franco work outside Australia?</p>
+    <p class="a">Franco is built specifically for Australian investors. Tax calculations follow ATO rules, references ASX as the default exchange, and uses Australian terminology throughout (superannuation, franking credits, etc.). It can technically track international holdings, but the tax features won't translate to other jurisdictions.</p>
+  </div>
+
+  <footer>
+    <span>© 2026 Franco</span>
+    <span>
+      <a href="/">Home</a> ·
+      <a href="/privacy">Privacy</a> ·
+      <a href="/terms">Terms</a>
+    </span>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Franco — Personal wealth tracker for Australian investors</title>
+<meta name="description" content="Track your shares, property, super, and crypto against your FIRE goal. Built for Australian investors. Data stays on your device.">
+<style>
+  :root {
+    --bg: #0D1017;
+    --surface: #161C26;
+    --border: #1F2A3A;
+    --text: #E8EAE6;
+    --text-dim: #7A8190;
+    --text-faint: #4A515F;
+    --accent: #F0A500;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .seal {
+    width: 120px;
+    height: 120px;
+    border-radius: 26px;
+    background: #1A1208;
+    position: relative;
+    margin: 0 auto 32px;
+    display: grid;
+    place-items: center;
+  }
+  .seal::before {
+    content: '';
+    position: absolute;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: #E09800;
+    border: 1px solid #100A03;
+  }
+  .seal::after {
+    content: '';
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1px solid #100A03;
+  }
+  .seal span {
+    position: relative;
+    z-index: 1;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: bold;
+    color: #100A03;
+    font-size: 56px;
+    line-height: 1;
+  }
+  h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+  .tagline {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 18px;
+    margin: 0 0 48px;
+  }
+  .lede {
+    font-size: 17px;
+    text-align: center;
+    max-width: 540px;
+    margin: 0 auto 40px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 0 0 56px;
+  }
+  .pillar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .pillar h3 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .pillar p {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .cta {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 15px;
+    margin: 0 0 48px;
+  }
+  .cta a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px;
+    color: var(--text-faint);
+    font-size: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  footer a {
+    color: var(--text-dim);
+    text-decoration: none;
+  }
+  footer a:hover { color: var(--text); }
+  @media (max-width: 600px) {
+    .container { padding: 48px 20px; }
+    h1 { font-size: 36px; }
+    .tagline { font-size: 16px; }
+    .seal { width: 96px; height: 96px; border-radius: 22px; }
+    .seal::before { width: 70px; height: 70px; }
+    .seal::after { width: 58px; height: 58px; }
+    .seal span { font-size: 44px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="seal">
+    <span>F</span>
+  </div>
+  <h1>Franco</h1>
+  <p class="tagline">Your path to financial independence — in dividends, in equity, in time.</p>
+
+  <p class="lede">A personal wealth tracker for Australian investors. Track shares, property, super, and crypto against your FIRE goal. Generate ATO-mapped tax summaries at end of financial year.</p>
+
+  <div class="pillars">
+    <div class="pillar">
+      <h3>Your data, your device</h3>
+      <p>Everything stored locally. No accounts, no servers, no tracking.</p>
+    </div>
+    <div class="pillar">
+      <h3>Built for AU tax</h3>
+      <p>50% CGT discount, FIFO cost-base, franking credits, ATO myTax labels.</p>
+    </div>
+    <div class="pillar">
+      <h3>FIRE-focused</h3>
+      <p>Project your path to financial independence as life changes.</p>
+    </div>
+  </div>
+
+  <p class="cta">Coming soon to the App Store.</p>
+</div>
+
+<footer>
+  <span>© 2026 Franco</span>
+  <span>
+    <a href="/privacy">Privacy</a> ·
+    <a href="/terms">Terms</a> ·
+    <a href="/support">Support</a>
+  </span>
+</footer>
+</body>
+</html>
