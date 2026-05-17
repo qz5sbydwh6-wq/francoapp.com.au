@@ -18,13 +18,9 @@
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
+    margin: 0; background: var(--bg); color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    line-height: 1.6;
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
+    line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased;
   }
   .container { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
   header { margin-bottom: 48px; }
@@ -42,20 +38,21 @@
   }
   .brand-mark span {
     position: relative; z-index: 1;
-    font-family: Georgia, 'Times New Roman', serif; font-weight: bold;
-    color: #100A03; font-size: 18px; line-height: 1;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: bold; color: #100A03; font-size: 18px; line-height: 1;
   }
   .brand-name {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 24px; font-weight: bold; letter-spacing: 0.5px;
   }
-  h1 { font-size: 32px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px; }
+  h1 {
+    font-size: 32px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px;
+  }
   .last-updated { color: var(--text-dim); font-size: 14px; margin: 0; }
   .callout {
     background: rgba(240, 165, 0, 0.08);
     border-left: 3px solid var(--accent);
-    padding: 16px 20px; margin: 32px 0 40px;
-    border-radius: 0 6px 6px 0;
+    padding: 16px 20px; margin: 32px 0 40px; border-radius: 0 6px 6px 0;
   }
   .callout p { margin: 0; color: var(--text); }
   h2 {
@@ -63,18 +60,19 @@
     margin: 36px 0 12px; letter-spacing: 0.3px;
   }
   h2:first-of-type { margin-top: 0; }
-  p { margin: 0 0 16px 0; color: var(--text); }
+  p { margin: 0 0 16px; color: var(--text); }
+  a { color: var(--accent); }
   footer {
-    margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
+    border-top: 1px solid var(--border); margin-top: 64px; padding-top: 24px;
     color: var(--text-faint); font-size: 13px;
-    display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;
+    display: flex; flex-wrap: wrap; gap: 16px;
+    justify-content: space-between; align-items: center;
   }
   footer a { color: var(--text-dim); text-decoration: none; }
   footer a:hover { color: var(--text); }
   @media (max-width: 600px) {
     .container { padding: 32px 20px 64px; }
     h1 { font-size: 26px; }
-    h2 { font-size: 16px; }
   }
 </style>
 </head>
@@ -83,10 +81,10 @@
   <header>
     <a href="/" class="brand">
       <div class="brand-mark"><span>F</span></div>
-      <span class="brand-name">Franco</span>
+      <div class="brand-name">Franco</div>
     </a>
     <h1>Terms of Use</h1>
-    <p class="last-updated">Last updated 6 May 2026</p>
+    <p class="last-updated">Last updated 17 May 2026</p>
   </header>
 
   <div class="callout">
@@ -109,7 +107,7 @@
   <p>Franco provides backup and restore functionality so you can protect your data and transfer it between devices. You are responsible for creating and securely storing your own backups. The developer is not liable for any data loss resulting from device failure, app deletion, or failure to maintain backups. Restoring from a backup will overwrite or merge with your existing data — review the restore options carefully before proceeding.</p>
 
   <h2>No financial advice</h2>
-  <p>Nothing in Franco constitutes financial product advice, investment advice, taxation advice, or superannuation advice. Franco is a tracking and modelling tool only. See the Disclaimer for full details.</p>
+  <p>Nothing in Franco constitutes financial product advice, investment advice, taxation advice, or superannuation advice. Franco is a tracking and modelling tool only. See the in-app Disclaimer for full details.</p>
 
   <h2>Third-party data</h2>
   <p>Franco relies on third-party providers including Yahoo Finance and CoinGecko for price data, and an address search service for property address suggestions. The availability and accuracy of these services is not guaranteed. Franco is not responsible for interruptions to or errors in third-party data.</p>
