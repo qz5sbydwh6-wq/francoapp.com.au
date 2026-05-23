@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy — Franco</title>
-<meta name="description" content="Franco's privacy policy. All financial data stays on your device. No tracking, no analytics, no third-party sharing.">
+<meta name="description" content="Franco's privacy policy. All financial data stays on your device. No analytics, no tracking, no third-party sharing.">
 <style>
   :root {
     --bg: #0D1017;
@@ -85,7 +85,7 @@
       <div class="brand-name">Franco</div>
     </a>
     <h1>Privacy Policy</h1>
-    <p class="last-updated">Last updated 17 May 2026</p>
+    <p class="last-updated">Last updated 23 May 2026</p>
   </header>
 
   <div class="callout">
@@ -93,13 +93,13 @@
   </div>
 
   <h2>Data stored on your device</h2>
-  <p>All data you enter into Franco — including share trades, dividends, property details, mortgage balances, rental income, property expenses, superannuation balances, crypto transactions, and your FIRE goal — is stored locally on your device using on-device storage. This data is never transmitted to our servers.</p>
+  <p>All data you enter into Franco — including share trades, dividends, property details, mortgage balances, rental income, property expenses, superannuation balances and contributions, crypto transactions, ETF annual tax statements (AMMA components), corporate actions (splits, capital returns, demergers), and your FIRE goal — is stored locally on your device using on-device storage. This data is never transmitted to our servers.</p>
 
   <h2>iCloud sync (Apple ID)</h2>
-  <p>Franco includes an iCloud key-value sync mechanism that, when available, mirrors your portfolio data to your personal iCloud account so it survives device loss and stays consistent across your iPhone and iPad. The data is stored in your own iCloud — Franco's developer has no access to it. Sync runs only when you are signed into iCloud on the device and the iCloud container is granted; on devices without iCloud, all functionality stays local. We do not currently expose an in-app toggle to disable sync — if you do not want sync, sign out of iCloud or disable iCloud for Franco in iOS Settings → [your name] → iCloud → Apps Using iCloud.</p>
+  <p>Franco includes an iCloud key-value sync mechanism that, when available, mirrors your portfolio data to your personal iCloud account so it survives device loss and stays consistent across your iPhone and iPad. The data is stored in your own iCloud — Franco's developer has no access to it. Sync runs only when you are signed into iCloud on the device and the iCloud container is granted; on devices without iCloud, all functionality stays local. We do not currently expose an in-app toggle to disable sync — if you do not want sync, sign out of iCloud or disable iCloud for Franco in iOS Settings &rarr; [your name] &rarr; iCloud &rarr; Apps Using iCloud.</p>
 
   <h2>Share and crypto price data</h2>
-  <p>To display live prices, Franco makes outbound requests to Yahoo Finance (ASX and international share prices) and CoinGecko (cryptocurrency prices). These requests contain only ticker symbols or coin identifiers — no personal data, account details, or portfolio information is included. Franco has no control over the privacy practices of these third-party providers.</p>
+  <p>To display live prices, Franco makes outbound requests to Yahoo Finance (ASX and international share prices) and CoinGecko (cryptocurrency prices). These requests contain only ticker symbols or coin identifiers — no personal data, account details, or portfolio information is included. Franco also requests historical price ranges from Yahoo to estimate dividend reinvestment plan (DRP) share counts when you enable per-ticker DRP. Franco has no control over the privacy practices of these third-party providers.</p>
 
   <h2>Address autocomplete</h2>
   <p>When adding a property, Franco may query an address search service to suggest property addresses as you type. Only the partial address text you have typed is sent in these requests — no other personal or financial data is transmitted. If you prefer not to use autocomplete, you can type your address directly without selecting a suggestion.</p>
@@ -107,8 +107,11 @@
   <h2>Backup files</h2>
   <p>Franco can export a backup file containing all your portfolio data in JSON format. When you tap Save to Files, the iOS document picker opens so you can choose where the backup is stored — iCloud Drive, On My iPhone, Dropbox, or anywhere else the Files app reaches. Franco does not automatically upload backup files anywhere. You are responsible for the security of any backup files you create.</p>
 
-  <h2>CSV imports</h2>
-  <p>When you import a broker or exchange CSV file, that file is read locally on your device and is not transmitted to any server. Imported transaction data is stored alongside your other data on-device.</p>
+  <h2>Imported documents (CSV and PDF)</h2>
+  <p>Franco can read transaction and statement files from your device, either via the in-app import tile or via the iOS share sheet. Supported file types include broker CSV exports, crypto exchange CSV exports, PDF contract notes and dividend statements from share registries, super fund statements, ETF annual tax statements (AMMA), and property manager statements. All file parsing happens locally on your device — file contents are never transmitted to any server. Files shared via the iOS share extension are placed in Franco's App Group container, read by the app, and then removed from the container after processing.</p>
+
+  <h2>On-device text extraction</h2>
+  <p>When you share a PDF into Franco, the app extracts text from the PDF locally on your device using built-in PDF rendering libraries. For PDFs that contain only images (scanned documents), Franco may use Apple's on-device Vision text recognition framework to extract text — this runs entirely on your device and does not send images to Apple or any other server. The extracted text is used only to identify and parse the document; it is not stored beyond the import session.</p>
 
   <h2>Analytics and crash reporting</h2>
   <p>Franco does not use any analytics services, crash reporting tools, or behavioural tracking. We have no visibility into how you use the app, what data you enter, or what features you access.</p>
@@ -120,11 +123,11 @@
   <p>If you have questions about this privacy policy, please contact us at <a href="mailto:admin@francoapp.com.au">admin@francoapp.com.au</a>.</p>
 
   <footer>
-    <span>© 2026 Franco</span>
+    <span>&copy; 2026 Franco</span>
     <span>
-      <a href="/">Home</a> ·
-      <a href="/terms">Terms</a> ·
-      <a href="/support">Support</a>
+      <a href="/">Home</a> &middot;
+      <a href="/terms.html">Terms</a> &middot;
+      <a href="mailto:admin@francoapp.com.au">Support</a>
     </span>
   </footer>
 </div>
