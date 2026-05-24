@@ -3,199 +3,657 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Franco — Personal wealth tracker for Australian investors</title>
-<meta name="description" content="Track your shares, property, super, and crypto against your FIRE goal. Built for Australian investors. Data stays on your device.">
+<title>Franco — Fully franked, financially free.</title>
+<meta name="description" content="Franco is a privacy-first iOS app for Australian investors. Track shares, property, super and crypto. Calculate franking credits, model CGT, plan your path to financial independence — all on your device.">
+<meta name="theme-color" content="#0D1017">
+<meta property="og:title" content="Franco — Fully franked, financially free.">
+<meta property="og:description" content="A privacy-first iOS app for Australian investors. Shares, property, super, crypto. Franking credits, CGT, FIRE planning. Your data stays on your device.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://francoapp.com.au">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://francoapp.com.au">
 <style>
   :root {
     --bg: #0D1017;
     --surface: #161C26;
+    --surface-elevated: #1B2230;
     --border: #1F2A3A;
     --text: #E8EAE6;
     --text-dim: #7A8190;
     --text-faint: #4A515F;
     --accent: #F0A500;
+    --accent-dim: #E09800;
+    --positive: #3DD68C;
+    --negative: #FF5E6D;
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
+    margin: 0; background: var(--bg); color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    line-height: 1.6;
-    font-size: 16px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    -webkit-font-smoothing: antialiased;
+    line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased;
   }
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 64px 24px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+
+  /* ─── Layout ─────────────────────────────────────────────────────── */
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .container-narrow { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  /* ─── Brand ──────────────────────────────────────────────────────── */
+  .brand {
+    display: inline-flex; align-items: center; gap: 12px;
+    text-decoration: none; color: var(--text);
   }
-  .seal {
-    width: 120px;
-    height: 120px;
-    border-radius: 26px;
-    background: #1A1208;
-    position: relative;
-    margin: 0 auto 32px;
-    display: grid;
-    place-items: center;
+  .brand-mark {
+    width: 36px; height: 36px; border-radius: 8px; background: #1A1208;
+    display: grid; place-items: center; flex-shrink: 0; position: relative;
   }
-  .seal::before {
-    content: '';
-    position: absolute;
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    background: #E09800;
-    border: 1px solid #100A03;
+  .brand-mark::before {
+    content: ''; position: absolute;
+    width: 26px; height: 26px; border-radius: 50%; background: #E09800;
   }
-  .seal::after {
-    content: '';
-    position: absolute;
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    border: 1px solid #100A03;
-  }
-  .seal span {
-    position: relative;
-    z-index: 1;
+  .brand-mark span {
+    position: relative; z-index: 1;
     font-family: Georgia, 'Times New Roman', serif;
-    font-weight: bold;
-    color: #100A03;
-    font-size: 56px;
-    line-height: 1;
+    font-weight: bold; color: #100A03; font-size: 18px; line-height: 1;
   }
-  h1 {
+  .brand-name {
     font-family: Georgia, 'Times New Roman', serif;
-    font-size: 48px;
-    font-weight: 700;
-    margin: 0 0 12px;
-    text-align: center;
-    letter-spacing: 0.5px;
+    font-size: 22px; font-weight: bold; letter-spacing: 0.5px;
   }
-  .tagline {
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 18px;
-    margin: 0 0 48px;
+
+  /* ─── Nav ────────────────────────────────────────────────────────── */
+  nav {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; background: rgba(13, 16, 23, 0.92);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    z-index: 100;
   }
-  .lede {
-    font-size: 17px;
-    text-align: center;
-    max-width: 540px;
-    margin: 0 auto 40px;
-    color: var(--text);
-    line-height: 1.7;
+  .nav-inner {
+    display: flex; justify-content: space-between; align-items: center;
   }
-  .pillars {
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a {
+    color: var(--text-dim); text-decoration: none; font-size: 14px;
+    font-weight: 500; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  @media (max-width: 640px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+  }
+  .nav-cta {
+    background: var(--accent); color: #100A03 !important;
+    padding: 8px 16px; border-radius: 8px; font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: var(--accent-dim); }
+
+  /* ─── Hero ───────────────────────────────────────────────────────── */
+  .hero {
+    padding: 96px 0 80px;
+    text-align: center;
+    background: radial-gradient(ellipse at top, rgba(240, 165, 0, 0.08), transparent 60%);
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(240, 165, 0, 0.10);
+    border: 1px solid rgba(240, 165, 0, 0.30);
+    color: var(--accent);
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.3px;
+    margin-bottom: 32px;
+  }
+  .hero-tag-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .hero h1 {
+    font-size: 56px; font-weight: 700; margin: 0 0 20px;
+    letter-spacing: -1.2px; line-height: 1.05;
+  }
+  .hero h1 .gold {
+    background: linear-gradient(180deg, #F0A500 0%, #C68900 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .hero p.lede {
+    font-size: 19px; color: var(--text-dim);
+    max-width: 620px; margin: 0 auto 40px;
+    line-height: 1.55;
+  }
+  .hero-cta-row {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  }
+  .btn-primary, .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 24px; border-radius: 10px;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none; transition: transform 0.15s, background 0.15s;
+  }
+  .btn-primary {
+    background: var(--accent); color: #100A03;
+  }
+  .btn-primary:hover { background: var(--accent-dim); transform: translateY(-1px); }
+  .btn-secondary {
+    background: var(--surface); color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { background: var(--surface-elevated); }
+  .hero-meta {
+    margin-top: 28px;
+    font-size: 13px; color: var(--text-faint);
+  }
+
+  /* Hero device showcase */
+  .hero-device {
+    margin: 64px auto 0;
+    max-width: 320px;
+    position: relative;
+  }
+  .hero-device img {
+    width: 100%; height: auto;
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+      0 30px 60px -12px rgba(0, 0, 0, 0.6),
+      0 0 80px -20px rgba(240, 165, 0, 0.25);
+    display: block;
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 64px 0 56px; }
+    .hero h1 { font-size: 40px; letter-spacing: -0.8px; }
+    .hero p.lede { font-size: 17px; }
+    .hero-device { margin-top: 48px; max-width: 260px; }
+  }
+
+  /* ─── Screenshots showcase ───────────────────────────────────────── */
+  .showcase {
+    padding: 80px 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(240, 165, 0, 0.03) 50%, transparent 100%);
+  }
+  .showcase-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+    align-items: start;
+  }
+  .showcase-item {
+    text-align: center;
+  }
+  .showcase-item img {
+    width: 100%; max-width: 280px;
+    height: auto; display: block;
+    margin: 0 auto 24px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+      0 20px 40px -12px rgba(0, 0, 0, 0.5),
+      0 0 60px -20px rgba(240, 165, 0, 0.15);
+    transition: transform 0.3s ease;
+  }
+  .showcase-item:hover img {
+    transform: translateY(-4px);
+  }
+  .showcase-item h4 {
+    font-size: 16px; font-weight: 600;
+    margin: 0 0 6px; color: var(--accent);
+    letter-spacing: 0.3px;
+  }
+  .showcase-item p {
+    font-size: 14px; color: var(--text-dim);
+    line-height: 1.55; margin: 0;
+    max-width: 280px; margin: 0 auto;
+  }
+  /* Stagger items on larger screens for visual interest */
+  @media (min-width: 900px) {
+    .showcase-grid > :nth-child(2) { margin-top: 40px; }
+    .showcase-grid > :nth-child(3) { margin-top: 0; }
+  }
+  @media (max-width: 640px) {
+    .showcase { padding: 56px 0; }
+  }
+
+  /* ─── Section base ───────────────────────────────────────────────── */
+  section { padding: 80px 0; }
+  .section-tag {
+    display: block; color: var(--accent);
+    font-size: 13px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  h2 {
+    font-size: 36px; font-weight: 700;
+    margin: 0 0 16px; letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+  .section-lede {
+    font-size: 18px; color: var(--text-dim);
+    max-width: 560px; margin: 0 0 48px;
+  }
+  .section-header-centered {
+    text-align: center;
+  }
+  .section-header-centered .section-lede { margin: 0 auto 48px; }
+  @media (max-width: 640px) {
+    section { padding: 56px 0; }
+    h2 { font-size: 28px; }
+  }
+
+  /* ─── Features grid ──────────────────────────────────────────────── */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 16px;
-    margin: 0 0 56px;
   }
-  .pillar {
+  .feature {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 14px;
+    padding: 28px;
+    transition: border-color 0.2s, transform 0.2s;
   }
-  .pillar h3 {
-    margin: 0 0 6px;
-    font-size: 14px;
+  .feature:hover {
+    border-color: rgba(240, 165, 0, 0.35);
+    transform: translateY(-2px);
+  }
+  .feature-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: rgba(240, 165, 0, 0.10);
+    display: grid; place-items: center;
     color: var(--accent);
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
+    margin-bottom: 18px;
+    font-size: 22px;
   }
-  .pillar p {
+  .feature h3 {
+    font-size: 17px; font-weight: 600; margin: 0 0 8px;
+    color: var(--text);
+  }
+  .feature p {
+    margin: 0; font-size: 14px; line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  /* ─── For Australian investors ───────────────────────────────────── */
+  .aus-section {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 48px;
     margin: 0;
-    color: var(--text-dim);
-    font-size: 14px;
-    line-height: 1.5;
   }
-  .cta {
+  .aus-section h2 { margin-bottom: 20px; }
+  .aus-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .aus-point {
+    border-left: 2px solid var(--accent);
+    padding-left: 16px;
+  }
+  .aus-point h4 {
+    margin: 0 0 6px; font-size: 14px; font-weight: 600;
+    color: var(--accent); letter-spacing: 0.3px;
+  }
+  .aus-point p {
+    margin: 0; font-size: 14px; color: var(--text-dim);
+    line-height: 1.55;
+  }
+  @media (max-width: 640px) {
+    .aus-section { padding: 32px 24px; }
+  }
+
+  /* ─── Pricing ─────────────────────────────────────────────────────── */
+  .pricing-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 480px; margin: 0 auto;
     text-align: center;
-    color: var(--text-dim);
-    font-size: 15px;
-    margin: 0 0 48px;
+    position: relative;
+    overflow: hidden;
   }
-  .cta a {
-    color: var(--accent);
-    text-decoration: none;
+  .pricing-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top, rgba(240, 165, 0, 0.08), transparent 60%);
+    pointer-events: none;
   }
+  .pricing-card > * { position: relative; }
+  .pricing-trial {
+    display: inline-block;
+    background: rgba(61, 214, 140, 0.12);
+    color: var(--positive);
+    padding: 4px 12px; border-radius: 100px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.3px;
+    margin-bottom: 20px;
+  }
+  .pricing-price {
+    font-size: 56px; font-weight: 700;
+    letter-spacing: -1px; line-height: 1; margin-bottom: 4px;
+  }
+  .pricing-price .currency { font-size: 28px; color: var(--text-dim); }
+  .pricing-price .period { font-size: 18px; color: var(--text-dim); font-weight: 500; }
+  .pricing-sub { color: var(--text-dim); font-size: 14px; margin-bottom: 32px; }
+  .pricing-features {
+    list-style: none; padding: 0; margin: 0 0 32px;
+    text-align: left;
+  }
+  .pricing-features li {
+    padding: 8px 0; padding-left: 28px;
+    position: relative; font-size: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .pricing-features li:first-child { border-top: 0; }
+  .pricing-features li::before {
+    content: '✓'; position: absolute; left: 0;
+    color: var(--positive); font-weight: 600;
+  }
+
+  /* ─── FAQ ─────────────────────────────────────────────────────────── */
+  .faq-list { display: grid; gap: 12px; }
+  details {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0;
+    transition: border-color 0.2s;
+  }
+  details[open] { border-color: rgba(240, 165, 0, 0.30); }
+  summary {
+    cursor: pointer;
+    padding: 20px 24px;
+    font-weight: 600; font-size: 15px;
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: '+';
+    color: var(--accent); font-size: 22px;
+    font-weight: 400; line-height: 1;
+    transition: transform 0.2s;
+  }
+  details[open] summary::after { content: '−'; }
+  details > div {
+    padding: 0 24px 22px;
+    color: var(--text-dim); font-size: 14px; line-height: 1.65;
+  }
+  details > div p { margin: 0 0 12px; }
+  details > div p:last-child { margin-bottom: 0; }
+
+  /* ─── Footer ──────────────────────────────────────────────────────── */
   footer {
     border-top: 1px solid var(--border);
-    padding: 24px;
-    color: var(--text-faint);
-    font-size: 13px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 720px;
-    width: 100%;
-    margin: 0 auto;
+    padding: 48px 0 64px; margin-top: 32px;
+    color: var(--text-faint); font-size: 13px;
   }
-  footer a {
-    color: var(--text-dim);
-    text-decoration: none;
+  .footer-inner {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    justify-content: space-between; align-items: center;
   }
+  footer a { color: var(--text-dim); text-decoration: none; }
   footer a:hover { color: var(--text); }
-  @media (max-width: 600px) {
-    .container { padding: 48px 20px; }
-    h1 { font-size: 36px; }
-    .tagline { font-size: 16px; }
-    .seal { width: 96px; height: 96px; border-radius: 22px; }
-    .seal::before { width: 70px; height: 70px; }
-    .seal::after { width: 58px; height: 58px; }
-    .seal span { font-size: 44px; }
-  }
+  .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="seal">
-    <span>F</span>
-  </div>
-  <h1>Franco</h1>
-  <p class="tagline">Your path to financial independence — in dividends, in equity, in time.</p>
 
-  <p class="lede">A personal wealth tracker for Australian investors. Track shares, property, super, and crypto against your FIRE goal. Generate ATO-mapped tax summaries at end of financial year.</p>
-
-  <div class="pillars">
-    <div class="pillar">
-      <h3>Your data, your device</h3>
-      <p>Everything stored locally. No accounts, no servers, no tracking.</p>
-    </div>
-    <div class="pillar">
-      <h3>Built for AU tax</h3>
-      <p>50% CGT discount, FIFO cost-base, franking credits, ATO myTax labels.</p>
-    </div>
-    <div class="pillar">
-      <h3>FIRE-focused</h3>
-      <p>Project your path to financial independence as life changes.</p>
+<nav>
+  <div class="container nav-inner">
+    <a href="/" class="brand">
+      <span class="brand-mark"><span>F</span></span>
+      <span class="brand-name">Franco</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#download" class="nav-cta">Get the app</a>
     </div>
   </div>
+</nav>
 
-  <p class="cta">Coming soon to the App Store.</p>
-</div>
+<header class="hero">
+  <div class="container-narrow">
+    <span class="hero-tag">
+      <span class="hero-tag-dot"></span>
+      Coming soon to the App Store
+    </span>
+    <h1>Fully franked,<br><span class="gold">financially free.</span></h1>
+    <p class="lede">
+      The Australian-built portfolio tracker that treats you like an investor, not the product.
+      Shares, property, super, crypto. Franking credits, CGT, FIRE planning — all on your device.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#features" class="btn-primary">See what's inside</a>
+      <a href="#pricing" class="btn-secondary">View pricing</a>
+    </div>
+    <p class="hero-meta">7-day free trial · No ads · No data sharing · iOS only</p>
+    <div class="hero-device">
+      <img src="img/screen-home.jpg" alt="Franco home screen showing $1.32M net worth and portfolio breakdown across shares, property, super and crypto" loading="eager" width="600" height="1304">
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="container">
+    <div class="section-header-centered">
+      <span class="section-tag">What's inside</span>
+      <h2>One app for your<br>whole financial picture.</h2>
+      <p class="section-lede">
+        Franco tracks every Australian asset class in one place — and does the tax maths that everyone else makes you do yourself.
+      </p>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">●</div>
+        <h3>Shares</h3>
+        <p>ASX, US, and global tickers. Track trades, holdings, dividends, and franking credits. Allocation pies, P/L, annual income.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⌂</div>
+        <h3>Property</h3>
+        <p>Per-property equity, mortgage paydown, rent vs interest, gross and net yield. Model selling decisions with full CGT breakdown.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">$</div>
+        <h3>Super</h3>
+        <p>Balance tracking with growth projections. See where your retirement is heading at your real contribution rate.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">₿</div>
+        <h3>Crypto</h3>
+        <p>BTC, ETH, and major coins with live pricing. Realised gains via FIFO, 50% CGT discount on long-term holdings.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⬢</div>
+        <h3>Tax reports for the ATO</h3>
+        <p>Generate a myTax-ready PDF for the financial year. Every dividend, every trade, every property, mapped to the right myTax field.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">▲</div>
+        <h3>FIRE planning</h3>
+        <p>Years-to-financial-independence calculated against your real net worth, contributions, and inflation. Not vibes — actual maths.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="showcase">
+  <div class="container">
+    <div class="section-header-centered">
+      <span class="section-tag">See it in action</span>
+      <h2>Designed for the way<br>you actually invest.</h2>
+      <p class="section-lede">
+        Every screen built around real Australian financial life — not a generic dashboard with extra fields bolted on.
+      </p>
+    </div>
+    <div class="showcase-grid">
+      <div class="showcase-item">
+        <img src="img/screen-shares.jpg" alt="Shares page showing allocation pie chart with 7 stocks and dividend income" loading="lazy" width="600" height="1304">
+        <h4>Share portfolio</h4>
+        <p>Track allocation, P/L, and annual income at a glance. ASX, US, and global tickers with live prices.</p>
+      </div>
+      <div class="showcase-item">
+        <img src="img/screen-goal.jpg" alt="Goal screen showing 10 years 8 months to financial independence with passive income progress" loading="lazy" width="600" height="1304">
+        <h4>Years to FI</h4>
+        <p>Honest projections of when you'll hit financial independence — based on your real numbers, not generic templates.</p>
+      </div>
+      <div class="showcase-item">
+        <img src="img/screen-tax.jpg" alt="Generated FY tax summary PDF showing dividends, franking credits, share trades and rental income" loading="lazy" width="600" height="1304">
+        <h4>Tax-ready PDF</h4>
+        <p>Generate an ATO-ready tax summary as a PDF, with every figure mapped to its myTax field.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="aus-section">
+      <span class="section-tag">Built for Australia</span>
+      <h2>The franking credit app for Australian investors.</h2>
+      <p style="color: var(--text-dim); font-size: 17px; max-width: 600px; margin: 0;">
+        Most portfolio apps are built for the US market. Franking credits, the 50% CGT discount, the ATO's myTax structure, the FY ending 30 June — Franco gets all of it right, because it was built here.
+      </p>
+      <div class="aus-points">
+        <div class="aus-point">
+          <h4>FRANKING CREDITS</h4>
+          <p>Track imputation credits per dividend. See your gross dividend income, not just the cash you receive.</p>
+        </div>
+        <div class="aus-point">
+          <h4>50% CGT DISCOUNT</h4>
+          <p>Holdings over 12 months automatically flagged. Tax-loss selling preview with full CGT consequences.</p>
+        </div>
+        <div class="aus-point">
+          <h4>myTax FIELD MAPPING</h4>
+          <p>Tax PDF shows you exactly which figure goes in which myTax box. Label T, U, P — all there.</p>
+        </div>
+        <div class="aus-point">
+          <h4>NEGATIVE GEARING</h4>
+          <p>Net rental income with deductible interest and expenses, formatted the way the ATO expects.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="background: var(--surface); margin: 0 -24px;">
+  <div class="container-narrow">
+    <div class="section-header-centered">
+      <span class="section-tag">Pricing</span>
+      <h2>One price.<br>No tiers, no upsells.</h2>
+      <p class="section-lede">
+        Franco is a paid app, which means you're the customer — not the product. No ads, no analytics, no data brokers.
+      </p>
+    </div>
+    <div class="pricing-card">
+      <span class="pricing-trial">7 DAYS FREE</span>
+      <div class="pricing-price">
+        <span class="currency">$</span>99
+        <span class="period">/year</span>
+      </div>
+      <p class="pricing-sub">AUD, billed annually via Apple. Cancel anytime in iOS Settings.</p>
+      <ul class="pricing-features">
+        <li>Shares, property, super, crypto — unlimited holdings</li>
+        <li>Dividends, franking credits, and CGT tracking</li>
+        <li>myTax-ready FY tax reports as PDF</li>
+        <li>FIRE planning with real growth modelling</li>
+        <li>iCloud sync between your iPhone and iPad</li>
+        <li>No ads, no tracking, no data sharing</li>
+      </ul>
+      <a href="#download" class="btn-primary" style="width: 100%; justify-content: center;">Notify me at launch</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container-narrow">
+    <div class="section-header-centered">
+      <span class="section-tag">FAQ</span>
+      <h2>Questions, answered.</h2>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>Is Franco financial advice?</summary>
+        <div>
+          <p>No. Franco is a tool that helps you track and model your own finances. It doesn't recommend specific investments or give personal financial advice. For advice tailored to your situation, talk to a qualified financial adviser.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Where does my data go?</summary>
+        <div>
+          <p>Your financial data stays on your device. Franco doesn't run analytics, doesn't share data with third parties, and doesn't sell anything about you. If you turn on iCloud sync, your data is encrypted in your private iCloud account — Apple's standard end-to-end encryption applies. Franco never sees it.</p>
+          <p>Market prices are fetched from public APIs (Yahoo Finance, CoinGecko), but no personal data is sent in those requests.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Can I import my brokerage data?</summary>
+        <div>
+          <p>Franco supports importing trades via CSV from most major Australian brokers, plus the iOS share extension lets you grab statements directly from PDF or email. Manual entry is also fully supported for any unusual cases.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Will Franco file my tax return?</summary>
+        <div>
+          <p>No — Franco produces a tax PDF with every figure you need to complete your own ATO myTax return (or hand to your accountant). The PDF maps each amount to the correct myTax label (T, U, P, etc.) so you can copy the numbers across in a few minutes.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Is there an Android version?</summary>
+        <div>
+          <p>Not yet. Franco is iPhone and iPad only at launch. An Android version may come in the future depending on demand.</p>
+        </div>
+      </details>
+      <details>
+        <summary>What happens if I cancel my subscription?</summary>
+        <div>
+          <p>Your data stays on your device — it's not deleted. You'll lose access to the app's features after your subscription ends, but if you resubscribe later, everything's still there.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Why a subscription instead of a one-off purchase?</summary>
+        <div>
+          <p>Honest answer: Franco needs ongoing development to keep up with ATO changes, tax law updates, broker changes, and iOS updates. A subscription pays for that ongoing work, instead of selling out to advertisers or selling your data. It's the model that lets a small indie app stay alive without compromising your privacy.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="container-narrow section-header-centered">
+    <span class="section-tag">Launching soon</span>
+    <h2>Be the first to know.</h2>
+    <p class="section-lede" style="margin-bottom: 28px;">
+      Franco is in App Store review. Once it goes live, this page will update with the App Store link.
+    </p>
+    <a href="mailto:admin@francoapp.com.au?subject=Notify%20me%20when%20Franco%20launches" class="btn-primary">
+      Email me at launch
+    </a>
+    <p class="hero-meta" style="margin-top: 20px;">
+      Or follow updates: <a href="mailto:admin@francoapp.com.au" style="color: var(--accent); text-decoration: none;">admin@francoapp.com.au</a>
+    </p>
+  </div>
+</section>
 
 <footer>
-  <span>© 2026 Franco</span>
-  <span>
-    <a href="/privacy">Privacy</a> ·
-    <a href="/terms">Terms</a> ·
-    <a href="/support">Support</a>
-  </span>
+  <div class="container footer-inner">
+    <div>
+      © 2026 Franco · Built in Melbourne · ABN 15 496 102 634
+    </div>
+    <div class="footer-links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="mailto:admin@francoapp.com.au">Contact</a>
+    </div>
+  </div>
 </footer>
+
 </body>
 </html>
